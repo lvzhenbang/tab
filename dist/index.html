@@ -1,0 +1,97 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>tab</title>
+  <style>
+    .setction {
+      padding: 2em;
+      border: 1px solid teal;
+      border-radius: 2em;
+      background-color: rgbas(0, 0, 0, .2);
+    }
+    .section+.sction {
+      margin-top: 1em;
+    }
+    .section>.tip {
+      padding: .5em;
+      background-color: #000;
+      color: #fff;
+    }
+    .section>.tab {
+      margin: 1em 0;
+    }
+    .tab {
+      position:  relative;
+      display: flex;
+      width: 300px;
+    }
+
+    .tab.vertical {
+      width: auto;
+      flex-direction: column;
+    }
+    .tab-item {
+      padding: .5em 1em;
+      color: #000;
+      cursor: pointer;
+      transition: 250ms all cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tab-item:hover {
+      color: #fff !important;
+      background-color: rgba(0, 0, 0, .35);
+    }
+    .tab.horizontal>.tab-item.active {
+      border-top-left-radius: .2em;
+      border-top-right-radius: .2em;
+    }
+    .tab__slider {
+      position: absolute;
+      bottom: 0;
+
+      pointer-events: none;
+      transition: 250ms all cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <h2>水平方向</h2>
+    <div class="tab horizontal">
+      <div class="tab-item">work</div>
+      <div class="tab-item active">life</div>
+      <div class="tab-item">game</div>
+      <div class="tab-item">other</div>
+    </div>
+    <div class="tip">注：设置 activeItem，为‘life’ item</div>
+  </section>
+
+  <section class="section">
+    <h2>垂直方向</h2>
+    <div class="tab vertical">
+      <div class="tab-item">work</div>
+      <div class="tab-item">life</div>
+      <div class="tab-item">game</div>
+      <div class="tab-item">other</div>
+      <div class="tab__slider"></div>
+    </div>
+    <div class="tip">注：没有设置 activeItem</div>
+  </section>
+<script type="text/javascript" src="countdown.min.js"></script></body>
+
+<script>
+ let tabHorizontal = new Tab(document.querySelector('.tab.horizontal'), {
+  direction: true, // 默认horizontal，可省略
+  height: 2,
+  backgroundColor: 'blue'
+});
+
+let tabHVertical = new Tab(document.querySelector('.tab.vertical'), {
+  direction: false, // vertical
+  width: 4,
+  backgroundColor: 'red'
+});
+</script>
+</html>
