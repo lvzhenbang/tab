@@ -1,6 +1,6 @@
 {
   "name": "lzb-tab",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a plugin of tab",
   "main": "dist/tab.min.js",
   "repository": {
@@ -19,7 +19,7 @@
     "test:coverage": "jest --coverage",
     "deploy": "git push && git checkout -b gh-pages && git push origin gh-pages:gh-pages && git checkout master && git branch -D gh-pages"
   },
-  "homepage": "https://lvzhenbang.github.io/countdown/dist/",
+  "homepage": "https://lvzhenbang.github.io/tab/dist/",
   "dependencies": {
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.4",
