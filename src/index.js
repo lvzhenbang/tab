@@ -13,6 +13,8 @@ class Tab {
     };
     this.items = this.$el.querySelectorAll('.tab-item');
     this.activeItem = this.getActiveItem();
+    this.scrollBarEl = this.getScrollBarEl();
+    this.$slider = this.getSlider();
 
     this.slider = {
       width: null,
@@ -22,7 +24,7 @@ class Tab {
       backgroundColor: this.options.backgroundColor,
     };
 
-    this.$slider = this.getSlider();
+    this.isHorizontal = this.options.direction;
 
     this.version = version;
 
@@ -65,14 +67,13 @@ class Tab {
   }
 
   callSlider() {
-    const isHorizontal = this.options.direction;
-    this.slider.width = isHorizontal
+    this.slider.width = this.isHorizontal
       ? addUnit(this.activeItem.scrollWidth) : addUnit(this.options.width);
-    this.slider.height = isHorizontal
+    this.slider.height = this.isHorizontal
       ? addUnit(this.options.height) : addUnit(this.activeItem.scrollHeight);
-    this.slider.top = isHorizontal
+    this.slider.top = this.isHorizontal
       ? undefined : addUnit(this.activeItem.offsetTop);
-    this.slider.left = isHorizontal
+    this.slider.left = this.isHorizontal
       ? addUnit(this.activeItem.offsetLeft) : undefined;
   }
 
@@ -84,6 +85,12 @@ class Tab {
       this.activeItem.style = null;
       item.classList.add('active');
       this.activeItem = item;
+      // enable tabscroller
+      if (this.scrollBarEl) {
+        this.tabScrollerTrigger();
+      } else {
+        throw new Error("it's error. Please check the options of Tab-instance.");
+      }
       // set the slider style
       this.setSliderStyle();
       // set the background and font colors the same
@@ -100,6 +107,47 @@ class Tab {
     for (const key in this.slider) {
       this.$slider.style[key] = this.slider[key];
     }
+  }
+
+  getScrollBarEl() {
+    const scrollBar = this.$el.parentNode;
+    return this.options.scrollBar && scrollBar.classList.contains('tab__scroller') ? scrollBar : null;
+  }
+
+  tabScrollerTrigger() {
+    const clientRect = this.activeItem.getBoundingClientRect();
+    const halfWidth = clientRect.width / 2;
+    const halfHeight = clientRect.height / 2;
+    let top = null;
+    let left = null;
+
+    if (clientRect.x < halfWidth) {
+      left = this.scrollBarEl.scrollLeft + clientRect.x - halfWidth;
+    } else if (clientRect.x < this.scrollBarEl.offsetWidth - 3 * halfWidth) {
+      left = this.scrollBarEl.scrollLeft;
+    } else {
+      left = this.scrollBarEl.scrollLeft
+        + clientRect.x + 3 * halfWidth - this.scrollBarEl.offsetWidth;
+    }
+
+    if (clientRect.y < halfHeight) {
+      top = this.scrollBarEl.scrollTop + clientRect.y - halfHeight;
+    } else if (clientRect.y < this.scrollBarEl.offsetHeight - 3 * halfHeight) {
+      top = this.scrollBarEl.scrollTop;
+    } else {
+      top = this.scrollBarEl.scrollTop
+        + clientRect.y + 3 * halfHeight - this.scrollBarEl.offsetHeight;
+    }
+
+    this.tabScrollTo(top, left);
+  }
+
+  tabScrollTo(top, left) {
+    this.scrollBarEl.scrollTo({
+      top: this.isHorizontal ? null : top,
+      left: this.isHorizontal ? left : null,
+      behavior: 'smooth',
+    });
   }
 }
 
