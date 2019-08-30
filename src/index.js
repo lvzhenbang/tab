@@ -41,15 +41,15 @@ class Tab {
   }
 
   tabTrigger() {
-    for (const tabItem of this.items) {
+    this.items.forEach((tabItem) => {
       tabItem.addEventListener('click', this.changeSlider.bind(this));
-    }
+    });
   }
 
   getActiveItem() {
     let activeEl = this.$el.querySelector('.tab-item.active');
     if (!activeEl) {
-      activeEl = this.items[0];
+      [activeEl] = this.items;
       activeEl.classList.add('active');
     }
     return activeEl;
@@ -104,9 +104,10 @@ class Tab {
 
   setSliderStyle() {
     this.callSlider();
-    for (const key in this.slider) {
-      this.$slider.style[key] = this.slider[key];
-    }
+
+    Object.entries(this.slider).forEach(([key, value]) => {
+      this.$slider.style[key] = value;
+    });
   }
 
   getScrollBarEl() {
