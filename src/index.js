@@ -118,34 +118,37 @@ class Tab {
     const clientRect = this.activeItem.getBoundingClientRect();
     const halfWidth = clientRect.width / 2;
     const halfHeight = clientRect.height / 2;
-    let top = null;
-    let left = null;
+    let finalPosition = null;
 
-    if (clientRect.x < halfWidth) {
-      left = this.scrollBarEl.scrollLeft + clientRect.x - halfWidth;
-    } else if (clientRect.x < this.scrollBarEl.offsetWidth - 3 * halfWidth) {
-      left = this.scrollBarEl.scrollLeft;
+    if (this.isHorizontal) {
+      if (clientRect.x < halfWidth) {
+        finalPosition = this.scrollBarEl.scrollLeft + clientRect.x - halfWidth;
+        this.tabScrollTo(finalPosition);
+      }
+
+      if (clientRect.x > this.scrollBarEl.offsetWidth - 3 * halfWidth) {
+        finalPosition = this.scrollBarEl.scrollLeft
+          + clientRect.x + 3 * halfWidth - this.scrollBarEl.offsetWidth;
+        this.tabScrollTo(finalPosition);
+      }
     } else {
-      left = this.scrollBarEl.scrollLeft
-        + clientRect.x + 3 * halfWidth - this.scrollBarEl.offsetWidth;
-    }
+      if (clientRect.y < halfHeight) {
+        finalPosition = this.scrollBarEl.scrollTop + clientRect.y - halfHeight;
+        this.tabScrollTo(finalPosition);
+      }
 
-    if (clientRect.y < halfHeight) {
-      top = this.scrollBarEl.scrollTop + clientRect.y - halfHeight;
-    } else if (clientRect.y < this.scrollBarEl.offsetHeight - 3 * halfHeight) {
-      top = this.scrollBarEl.scrollTop;
-    } else {
-      top = this.scrollBarEl.scrollTop
-        + clientRect.y + 3 * halfHeight - this.scrollBarEl.offsetHeight;
+      if (clientRect.y > this.scrollBarEl.offsetHeight - 3 * halfHeight) {
+        finalPosition = this.scrollBarEl.scrollTop
+          + clientRect.y + 3 * halfHeight - this.scrollBarEl.offsetHeight;
+        this.tabScrollTo(finalPosition);
+      }
     }
-
-    this.tabScrollTo(top, left);
   }
 
-  tabScrollTo(top, left) {
+  tabScrollTo(finalPosition) {
     this.scrollBarEl.scrollTo({
-      top: this.isHorizontal ? null : top,
-      left: this.isHorizontal ? left : null,
+      top: this.isHorizontal ? null : finalPosition,
+      left: this.isHorizontal ? finalPosition : null,
       behavior: 'smooth',
     });
   }
