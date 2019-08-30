@@ -118,28 +118,54 @@ class Tab {
     const clientRect = this.activeItem.getBoundingClientRect();
     const halfWidth = clientRect.width / 2;
     const halfHeight = clientRect.height / 2;
+    const scrollBarRectX = clientRect.x - this.scrollBarEl.getBoundingClientRect().x;
+    const scrollBarRectY = clientRect.y - this.scrollBarEl.getBoundingClientRect().y;
+
     let finalPosition = null;
 
     if (this.isHorizontal) {
-      if (clientRect.x < halfWidth) {
-        finalPosition = this.scrollBarEl.scrollLeft + clientRect.x - halfWidth;
+      if (scrollBarRectX < halfWidth) {
+        const previousEl = this.activeItem.previousElementSibling;
+        if (previousEl) {
+          finalPosition = this.scrollBarEl.scrollLeft + scrollBarRectX - previousEl.offsetWidth / 2;
+        } else {
+          finalPosition = 0;
+        }
         this.tabScrollTo(finalPosition);
       }
 
-      if (clientRect.x > this.scrollBarEl.offsetWidth - 3 * halfWidth) {
-        finalPosition = this.scrollBarEl.scrollLeft
-          + clientRect.x + 3 * halfWidth - this.scrollBarEl.offsetWidth;
+      if (scrollBarRectX > this.scrollBarEl.offsetWidth - 3 * halfWidth) {
+        const nextEl = this.activeItem.nextElementSibling;
+        if (nextEl) {
+          finalPosition = this.scrollBarEl.scrollLeft
+            + scrollBarRectX - this.scrollBarEl.offsetWidth
+            + 2 * halfWidth + nextEl.offsetWidth / 2;
+        } else {
+          finalPosition = this.scrollBarEl.offsetWidth;
+        }
+
         this.tabScrollTo(finalPosition);
       }
     } else {
-      if (clientRect.y < halfHeight) {
-        finalPosition = this.scrollBarEl.scrollTop + clientRect.y - halfHeight;
+      if (scrollBarRectY < halfHeight) {
+        const previousEl = this.activeItem.previousElementSibling;
+        if (previousEl) {
+          finalPosition = this.scrollBarEl.scrollTop + scrollBarRectY - halfHeight;
+        } else {
+          finalPosition = 0;
+        }
         this.tabScrollTo(finalPosition);
       }
 
-      if (clientRect.y > this.scrollBarEl.offsetHeight - 3 * halfHeight) {
-        finalPosition = this.scrollBarEl.scrollTop
-          + clientRect.y + 3 * halfHeight - this.scrollBarEl.offsetHeight;
+      if (scrollBarRectY > this.scrollBarEl.offsetHeight - 3 * halfHeight) {
+        const nextEl = this.activeItem.nextElementSibling;
+        if (nextEl) {
+          finalPosition = this.scrollBarEl.scrollTop + scrollBarRectY
+            + 2 * halfHeight - this.scrollBarEl.offsetHeight
+            + nextEl.offsetWidth / 2;
+        } else {
+          finalPosition = this.scrollBarEl.offsetHeight;
+        }
         this.tabScrollTo(finalPosition);
       }
     }
