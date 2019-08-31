@@ -17,7 +17,7 @@
     "lint:fix": "eslint src/ --fix",
     "test": "jest src/index.test.js",
     "test:coverage": "jest --coverage",
-    "deploy": "git push && git checkout -b gh-pages && git push origin gh-pages:gh-pages && git checkout master && git branch -D gh-pages"
+    "deploy": "git checkout -b gh-pages && git pull origin gh-pages && git push origin gh-pages:gh-pages && git checkout master && git branch -D gh-pages"
   },
   "homepage": "https://lvzhenbang.github.io/tab/dist/",
   "dependencies": {
