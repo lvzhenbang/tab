@@ -165,7 +165,7 @@ class Tab {
         if (nextEl) {
           finalPosition = this.scrollBarEl.scrollTop + scrollBarRectY
             + 2 * halfHeight - this.scrollBarEl.offsetHeight
-            + nextEl.offsetWidth / 2;
+            + nextEl.offsetHeight / 2;
         } else {
           finalPosition = this.scrollBarEl.offsetHeight;
         }
