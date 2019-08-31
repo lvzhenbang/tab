@@ -37,6 +37,12 @@
     .tab__scroller {
       overflow-x: scroll;
     }
+    
+    .tab__scroller.vertical {
+      max-height: 100px;
+      overflow-y: scroll;
+      overflow-x: auto;
+    }
 
     .tab__scroller::-webkit-scrollbar {
       display: none;
@@ -108,12 +114,16 @@
 
   <section class="section">
     <h2>垂直方向</h2>
-    <div class="tab__scroller">
+    <div class="tab__scroller vertical">
       <div class="tab vertical">
         <div class="tab-item">work</div>
         <div class="tab-item">life</div>
         <div class="tab-item">game</div>
         <div class="tab-item">other</div>
+        <div class="tab-item">dddd</div>
+        <div class="tab-item">aaa</div>
+        <div class="tab-item">bbdsss</div>
+        <div class="tab-item">qq</div>
         <div class="tab__slider"></div>
       </div>
     </div>

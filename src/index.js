@@ -4,6 +4,8 @@ import version from '../config/version';
 import addUnit from './utils/addUnit';
 import inBrowser from './utils/inBrowser';
 
+import ScrollTo from './scrollTo';
+
 class Tab {
   constructor(el, opt) {
     this.$el = el;
@@ -119,8 +121,8 @@ class Tab {
     const clientRect = this.activeItem.getBoundingClientRect();
     const halfWidth = clientRect.width / 2;
     const halfHeight = clientRect.height / 2;
-    const scrollBarRectX = clientRect.x - this.scrollBarEl.getBoundingClientRect().x;
-    const scrollBarRectY = clientRect.y - this.scrollBarEl.getBoundingClientRect().y;
+    const scrollBarRectX = clientRect.left - this.scrollBarEl.getBoundingClientRect().left;
+    const scrollBarRectY = clientRect.top - this.scrollBarEl.getBoundingClientRect().top;
 
     let finalPosition = null;
 
@@ -139,8 +141,8 @@ class Tab {
         const nextEl = this.activeItem.nextElementSibling;
         if (nextEl) {
           finalPosition = this.scrollBarEl.scrollLeft
-            + scrollBarRectX - this.scrollBarEl.offsetWidth
-            + 2 * halfWidth + nextEl.offsetWidth / 2;
+            + scrollBarRectX + 2 * halfWidth - this.scrollBarEl.offsetWidth
+            + nextEl.offsetWidth / 2;
         } else {
           finalPosition = this.scrollBarEl.offsetWidth;
         }
@@ -173,11 +175,20 @@ class Tab {
   }
 
   tabScrollTo(finalPosition) {
-    this.scrollBarEl.scrollTo({
-      top: this.isHorizontal ? null : finalPosition,
-      left: this.isHorizontal ? finalPosition : null,
-      behavior: 'smooth',
-    });
+    if ('scrollTo' in this.$el) {
+      this.scrollBarEl.scrollTo({
+        top: this.isHorizontal ? null : finalPosition,
+        left: this.isHorizontal ? finalPosition : null,
+        behavior: 'smooth',
+      });
+    } else {
+      const scrollTo = new ScrollTo(this.scrollBarEl, {
+        top: this.isHorizontal ? null : finalPosition,
+        left: this.isHorizontal ? finalPosition : null,
+        behavior: 'smooth',
+      });
+      scrollTo();
+    }
   }
 }
 
