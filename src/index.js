@@ -175,19 +175,19 @@ class Tab {
   }
 
   tabScrollTo(finalPosition) {
-    if ('scrollTo' in this.$el) {
-      this.scrollBarEl.scrollTo({
-        top: this.isHorizontal ? null : finalPosition,
-        left: this.isHorizontal ? finalPosition : null,
-        behavior: 'smooth',
-      });
-    } else {
-      const scrollTo = new ScrollTo(this.scrollBarEl, {
-        top: this.isHorizontal ? null : finalPosition,
-        left: this.isHorizontal ? finalPosition : null,
-        behavior: 'smooth',
-      });
-      scrollTo();
+    this.handleCompatible();
+    this.scrollBarEl.scrollTo({
+      top: this.isHorizontal ? null : finalPosition,
+      left: this.isHorizontal ? finalPosition : null,
+      behavior: 'smooth',
+    });
+  }
+
+  handleCompatible() {
+    if (!Object.prototype.hasOwnProperty.call(this.$el, 'scrollTo')) {
+      window.Element.prototype.scrollTo = function scrollTo(opts) {
+        return new ScrollTo(this, opts);
+      };
     }
   }
 }

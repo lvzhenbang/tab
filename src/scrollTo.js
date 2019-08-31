@@ -37,7 +37,7 @@ class ScrollTo {
   }
 
   init() {
-    if (!(this.$el instanceof Element)) {
+    if (!(this.$el instanceof window.Element)) {
       throw new Error(`element passed to scrollTo() must be either the window or a DOM element, you passed ${this.$el}!`);
     }
 
