@@ -38,7 +38,7 @@ class Tab {
       this.setSliderStyle();
       this.setActiveItemStyle();
     }
-
+    this.hideScrollbar();
     this.tabTrigger();
   }
 
@@ -117,6 +117,19 @@ class Tab {
     return this.options.scrollBar && scrollBar.classList.contains('tab__scroller') ? scrollBar : null;
   }
 
+  hideScrollbar() {
+    if (
+      this.scrollBarEl.offsetHeight > this.scrollBarEl.clientHeight
+      || this.scrollBarEl.offsetWidth > this.scrollBarEl.clientWidth
+    ) {
+      if (this.isHorizontal) {
+        this.scrollBarEl.style['margin-bottom'] = addUnit(this.scrollBarEl.clientHeight - this.scrollBarEl.offsetHeight);
+      } else {
+        this.scrollBarEl.style['margin-right'] = addUnit(this.scrollBarEl.clientWidth - this.scrollBarEl.offsetWidth);
+      }
+    }
+  }
+
   tabScrollerTrigger() {
     const clientRect = this.activeItem.getBoundingClientRect();
     const halfWidth = clientRect.width / 2;
@@ -163,8 +176,8 @@ class Tab {
       if (scrollBarRectY > this.scrollBarEl.offsetHeight - 3 * halfHeight) {
         const nextEl = this.activeItem.nextElementSibling;
         if (nextEl) {
-          finalPosition = this.scrollBarEl.scrollTop + scrollBarRectY
-            + 2 * halfHeight - this.scrollBarEl.offsetHeight
+          finalPosition = this.scrollBarEl.scrollTop
+            + scrollBarRectY + 2 * halfHeight - this.scrollBarEl.offsetHeight
             + nextEl.offsetHeight / 2;
         } else {
           finalPosition = this.scrollBarEl.offsetHeight;
