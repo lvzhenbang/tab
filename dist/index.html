@@ -144,14 +144,14 @@
 <script type="text/javascript" src="tab.min.js"></script></body>
 
 <script>
-  let tabHorizontal = new Tab(document.querySelector('.tab.horizontal'), {
+  var tabHorizontal = new Tab(document.querySelector('.tab.horizontal'), {
     direction: true, // 默认horizontal，可省略
     height: 2,
     backgroundColor: 'blue',
     scrollBar: true, // 默认为false
   });
 
-  let tabHVertical = new Tab(document.querySelector('.tab.vertical'), {
+  var tabHVertical = new Tab(document.querySelector('.tab.vertical'), {
     direction: false, // vertical
     width: 4,
     backgroundColor: 'red',
