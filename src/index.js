@@ -84,7 +84,7 @@ class Tab {
     const itemClassList = item.classList;
     if (!itemClassList.contains('active')) {
       this.activeItem.classList.remove('active');
-      this.activeItem.style = null;
+      this.removeActiveItemStyle();
       item.classList.add('active');
       this.activeItem = item;
       // enable tabscroller
@@ -102,6 +102,10 @@ class Tab {
 
   setActiveItemStyle() {
     this.activeItem.style.color = this.options.backgroundColor;
+  }
+
+  removeActiveItemStyle() {
+    this.activeItem.style.color = '';
   }
 
   setSliderStyle() {
