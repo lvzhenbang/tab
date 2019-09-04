@@ -1,10 +1,10 @@
+import ScrollTo from 'lzb-scrollto';
+
 import defaults from '../config/defaults';
 import version from '../config/version';
 
 import addUnit from './utils/addUnit';
 import inBrowser from './utils/inBrowser';
-
-import ScrollTo from './scrollTo';
 
 class Tab {
   constructor(el, opt) {
