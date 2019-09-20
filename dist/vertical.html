@@ -14,24 +14,27 @@
       background-color: rgba(0, 0, 0, .2);
     }
 
-    .section>.tip {
+    .box {
+      display: flex;
+      height: 200px;
+    }
+
+    .section .tip {
       padding: .5em;
+      margin-top: 10px;
       background-color: #000;
       color: #fff;
     }
 
-    .section>.tab {
-      margin: 1em 0;
+    .tab__scroller-wrapper {
+      overflow: hidden;
+      border: 1px solid red;
     }
 
     .tab {
       position: relative;
       display: flex;
       width: 300px;
-    }
-
-    .tab__scroller-wrapper {
-      overflow: hidden;
     }
 
     .tab__scroller {
@@ -41,7 +44,6 @@
     }
     
     .tab__scroller.vertical {
-      max-height: 100px;
       overflow-y: scroll;
       overflow-x: auto;
       margin-right: -20px;
@@ -50,15 +52,25 @@
 
     .tab.vertical {
       width: auto;
+      height: 200px;
       flex-direction: column;
     }
 
     .tab-item {
       position: relative;
       padding: .5em 1em;
+      font-size: 18px;
+      line-height: 1.0;
       color: #000;
       cursor: pointer;
+      border-width: 1px;
+      border-style: solid;
+      border-color: transparent;
       transition: 250ms all cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tab-item+.tab-item {
+      border-top-color: #fff;
     }
 
     .tab-item:hover {
@@ -90,8 +102,8 @@
     }
 
     .tab-content {
+      flex-grow: 1;
       border: 1px solid greenyellow;
-      height: 300px;
       overflow-y: scroll;
     }
     .tab_pane {
@@ -109,65 +121,65 @@
 </head>
 
 <body>
-  <h2>水平方向</h2>
-  <section class="section" style="width: 300px;">
-    <div class="tab__scroller-wrapper">
-      <div class="tab__scroller">
-        <div class="tab horizontal">
-          <div class="tab-item">work</div>
-          <div class="tab-item active">life</div>
-          <div class="tab-item">game</div>
-          <div class="tab-item">other</div>
-          <div class="tab-item">aaa</div>
-          <div class="tab-item">bbb</div>
-          <div class="tab-item">cc</div>
-          <div class="tab-item">dddd</div>
-          <div class="tab-item">aaa</div>
-          <div class="tab-item">bbdsss</div>
-          <div class="tab-item">qq</div>
+  <h2>垂直方向</h2>
+  <section class="section">
+    <div class="box">
+      <div class="tab__scroller-wrapper">
+        <div class="tab__scroller vertical">
+          <div class="tab vertical">
+            <div class="tab-item">work</div>
+            <div class="tab-item">life</div>
+            <div class="tab-item">game</div>
+            <div class="tab-item">other</div>
+            <div class="tab-item">dddd</div>
+            <div class="tab-item">aaa</div>
+            <div class="tab-item">bbdsss</div>
+            <div class="tab-item">qq</div>
+            <div class="tab__slider"></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content">
+        <div class="tab_pane work">
+          <div class="tab_pane-title">work</div>
+          <div class="tab_pane-body"></div>
+        </div>
+        <div class="tab_pane life">
+          <div class="tab_pane-title">life</div>
+          <div class="tab_pane-body"></div>
+        </div>
+        <div class="tab_pane game">
+          <div class="tab_pane-title">game</div>
+          <div class="tab_pane-body"></div>
+        </div>
+        <div class="tab_pane other">
+          <div class="tab_pane-title">other</div>
+          <div class="tab_pane-body"></div>
+        </div>
+        <div class="tab_pane cc">
+          <div class="tab_pane-title">cc</div>
+          <div class="tab_pane-body"></div>
+        </div>
+        <div class="tab_pane qq">
+          <div class="tab_pane-title">qq</div>
+          <div class="tab_pane-body"></div>
+        </div>
+        <div class="tab_pane aaa">
+          <div class="tab_pane-title">aaa</div>
+          <div class="tab_pane-body"></div>
         </div>
       </div>
     </div>
-    <div class="tab-content">
-      <div class="tab_pane work">
-        <div class="tab_pane-title">work</div>
-        <div class="tab_pane-body"></div>
-      </div>
-      <div class="tab_pane life">
-        <div class="tab_pane-title">life</div>
-        <div class="tab_pane-body"></div>
-      </div>
-      <div class="tab_pane game">
-        <div class="tab_pane-title">game</div>
-        <div class="tab_pane-body"></div>
-      </div>
-      <div class="tab_pane other">
-        <div class="tab_pane-title">other</div>
-        <div class="tab_pane-body"></div>
-      </div>
-      <div class="tab_pane cc">
-        <div class="tab_pane-title">cc</div>
-        <div class="tab_pane-body"></div>
-      </div>
-      <div class="tab_pane qq">
-        <div class="tab_pane-title">qq</div>
-        <div class="tab_pane-body"></div>
-      </div>
-      <div class="tab_pane aaa">
-        <div class="tab_pane-title">aaa</div>
-        <div class="tab_pane-body"></div>
-      </div>
-    </div>
-    <div class="tip">注：设置 activeItem，为‘life’ item</div>
+    <div class="tip">注：没有设置 activeItem</div>
   </section>
 <script type="text/javascript" src="tab.min.js"></script></body>
 
 <script>
-  var tabHorizontal = new Tab(document.querySelector('.tab.horizontal'), {
-    direction: true, // 默认horizontal，可省略
-    height: 2,
-    backgroundColor: 'blue',
-    // scrollBar: true, // 是否显示默认的滚动条，默认为false
+  var tabHVertical = new Tab(document.querySelector('.tab.vertical'), {
+    direction: false, // vertical
+    width: 4,
+    backgroundColor: 'red',
+    scrollBar: true, // 隐藏scrollbar
     tabContentFn: function(self) {
       window.addEventListener('hashchange', () => {
         const tabpane = document.querySelector('.' + self.hashValue);
