@@ -35,20 +35,24 @@ class Tab {
   }
 
   init() {
+    this.scroll = el => new ScrollIntoView(el, {
+      behavior: 'smooth',
+      block: 'start',
+      fixed: true,
+    });
+
     if (!this.options.hideSlider) {
       this.setSliderStyle();
       this.setActiveItemStyle();
       this.setHash(this.hashValue);
     }
-    this.hideScrollbar();
-    this.tabTrigger();
 
     if (this.options.tabContentFn) {
-      this.scroll = el => new ScrollIntoView(el, {
-        behavior: 'auto',
-        block: 'start',
-      });
+      this.scroll(document.querySelector(`.${this.hashValue}`));
     }
+
+    this.hideScrollbar();
+    this.tabTrigger();
   }
 
   tabTrigger() {
