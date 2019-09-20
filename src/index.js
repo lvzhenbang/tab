@@ -1,4 +1,5 @@
 import ScrollIntoView from 'lzb-scrollintoview';
+import ScrollTo from 'lzb-scrollto';
 
 import defaults from '../config/defaults';
 import version from '../config/version';
