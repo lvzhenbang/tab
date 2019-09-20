@@ -167,7 +167,7 @@ class Tab {
         this.$el.style['margin-bottom'] = addUnit(10);
         this.scrollBarEl.style['margin-bottom'] = addUnit(-10);
       } else {
-        this.$el.style['margin-bottom'] = addUnit(10);
+        this.$el.style['margin-right'] = addUnit(10);
         this.scrollBarEl.style['margin-right'] = addUnit(-10);
       }
     }
