@@ -171,7 +171,7 @@
     direction: true, // 默认horizontal，可省略
     height: 2,
     backgroundColor: 'blue',
-    scrollBar: true, // 默认为false
+    // scrollBar: true, // 是否显示默认的滚动条，默认为false
     tabContentFn: function(self) {
       window.addEventListener('hashchange', () => {
         const tabpane = document.querySelector('.' + self.hashValue);

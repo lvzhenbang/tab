@@ -144,18 +144,31 @@ class Tab {
 
   getScrollBarEl() {
     const scrollBar = this.$el.parentNode;
-    return this.options.scrollBar && scrollBar.classList.contains('tab__scroller') ? scrollBar : null;
+    return scrollBar.classList.contains('tab__scroller') ? scrollBar : null;
   }
 
   hideScrollbar() {
     if (
-      this.scrollBarEl.offsetHeight > this.scrollBarEl.clientHeight
-      || this.scrollBarEl.offsetWidth > this.scrollBarEl.clientWidth
+      this.options.scrollBar
+      && (
+        this.scrollBarEl.offsetHeight > this.scrollBarEl.clientHeight
+        || this.scrollBarEl.offsetWidth > this.scrollBarEl.clientWidth
+      )
     ) {
       if (this.isHorizontal) {
         this.scrollBarEl.style['margin-bottom'] = addUnit(this.scrollBarEl.clientHeight - this.scrollBarEl.offsetHeight);
       } else {
         this.scrollBarEl.style['margin-right'] = addUnit(this.scrollBarEl.clientWidth - this.scrollBarEl.offsetWidth);
+      }
+    }
+
+    if (!this.options.scrollBar) {
+      if (this.isHorizontal) {
+        this.$el.style['margin-bottom'] = addUnit(10);
+        this.scrollBarEl.style['margin-bottom'] = addUnit(-10);
+      } else {
+        this.$el.style['margin-bottom'] = addUnit(10);
+        this.scrollBarEl.style['margin-right'] = addUnit(-10);
       }
     }
   }
