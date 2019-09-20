@@ -4583,10 +4583,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lzb-scrollintoview@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/lzb-scrollintoview/-/lzb-scrollintoview-0.0.4.tgz#0cc30929abf5cb367d4a811a578ad46437afca5f"
-  integrity sha512-BSEXLRhCT/qMR9SAT7DjxhJ5TQh4ZJh1Ww0rdA3Lw4L4gHzBQjZXiE3BtIYiAtQfQacxp7+n6gjxNCxyDdimBQ==
+lzb-scrollintoview@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/lzb-scrollintoview/-/lzb-scrollintoview-0.0.5.tgz#18b82a43df4dc5850d6320777f8e8ec57958eb6a"
+  integrity sha512-yB1X5gFSr8YfR3yTcdHUt3CWZ0ycJuo6SPTvfd29jMkSDGriJFzLawq8O6mI0Le99Mtn/tZ/lu3b4FJGLygH9Q==
   dependencies:
     "@babel/cli" "^7.5.0"
     "@babel/core" "^7.5.4"
