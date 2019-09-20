@@ -1,4 +1,4 @@
-import ScrollTo from 'lzb-scrollto';
+import ScrollIntoView from 'lzb-scrollintoview';
 
 import defaults from '../config/defaults';
 import version from '../config/version';
@@ -27,6 +27,7 @@ class Tab {
     };
 
     this.isHorizontal = this.options.direction;
+    this.hashValue = undefined;
 
     this.version = version;
 
@@ -37,15 +38,35 @@ class Tab {
     if (!this.options.hideSlider) {
       this.setSliderStyle();
       this.setActiveItemStyle();
+      this.setHash(this.hashValue);
     }
     this.hideScrollbar();
     this.tabTrigger();
+
+    if (this.options.tabContentFn) {
+      this.scroll = el => new ScrollIntoView(el, {
+        behavior: 'auto',
+        block: 'start',
+      });
+    }
   }
 
   tabTrigger() {
     this.items.forEach((tabItem) => {
-      tabItem.addEventListener('click', this.changeSlider.bind(this));
+      tabItem.addEventListener('click', (e) => {
+        this.changeSlider(e);
+        this.setHash(tabItem.innerText);
+      });
     });
+  }
+
+  setHash(value) {
+    const hashVlaue = value || this.activeItem.innerText;
+    window.location.hash = hashVlaue;
+    this.hashValue = hashVlaue;
+    if (this.options.tabContentFn) {
+      this.options.tabContentFn(this);
+    }
   }
 
   getActiveItem() {

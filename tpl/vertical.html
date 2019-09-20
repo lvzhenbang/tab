@@ -52,10 +52,6 @@
       margin-bottom: 0;
     }
 
-    /* .tab__scroller::-webkit-scrollbar {
-      display: none;
-    } */
-
     .tab.vertical {
       width: auto;
       flex-direction: column;
@@ -96,32 +92,27 @@
       z-index: -1;
       transform: scale(2) translateX(-50%);
     }
+
+    .tab-content {
+      border: 1px solid greenyellow;
+      height: 300px;
+      overflow-y: scroll;
+    }
+    .tab_pane {
+      padding: 20px;
+    }
+    .tab_pane-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .tab_pane-body {
+      height: 60px;
+      background-color: ghostwhite;
+    }
   </style>
 </head>
 
 <body>
-  <section class="section">
-    <h2>水平方向</h2>
-    <div class="tab__scroller-wrapper">
-      <div class="tab__scroller">
-        <div class="tab horizontal">
-          <div class="tab-item">work</div>
-          <div class="tab-item active">life</div>
-          <div class="tab-item">game</div>
-          <div class="tab-item">other</div>
-          <div class="tab-item">aaa</div>
-          <div class="tab-item">bbb</div>
-          <div class="tab-item">cc</div>
-          <div class="tab-item">dddd</div>
-          <div class="tab-item">aaa</div>
-          <div class="tab-item">bbdsss</div>
-          <div class="tab-item">qq</div>
-        </div>
-      </div>
-    </div>
-    <div class="tip">注：设置 activeItem，为‘life’ item</div>
-  </section>
-
   <section class="section">
     <h2>垂直方向</h2>
     <div class="tab__scroller-wrapper">
@@ -141,16 +132,9 @@
     </div>
     <div class="tip">注：没有设置 activeItem</div>
   </section>
-<script type="text/javascript" src="tab.min.js"></script></body>
+</body>
 
 <script>
-  var tabHorizontal = new Tab(document.querySelector('.tab.horizontal'), {
-    direction: true, // 默认horizontal，可省略
-    height: 2,
-    backgroundColor: 'blue',
-    scrollBar: true, // 默认为false
-  });
-
   var tabHVertical = new Tab(document.querySelector('.tab.vertical'), {
     direction: false, // vertical
     width: 4,

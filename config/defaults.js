@@ -5,6 +5,7 @@ const defaults = {
   width: 2,
   backgroundColor: '#000',
   scrollBar: false,
+  tabContentFn: false,
 };
 
 export default defaults;

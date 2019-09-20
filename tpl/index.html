@@ -52,10 +52,6 @@
       margin-bottom: 0;
     }
 
-    /* .tab__scroller::-webkit-scrollbar {
-      display: none;
-    } */
-
     .tab.vertical {
       width: auto;
       flex-direction: column;
@@ -96,11 +92,28 @@
       z-index: -1;
       transform: scale(2) translateX(-50%);
     }
+
+    .tab-content {
+      border: 1px solid greenyellow;
+      height: 300px;
+      overflow-y: scroll;
+    }
+    .tab_pane {
+      padding: 20px;
+    }
+    .tab_pane-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .tab_pane-body {
+      height: 60px;
+      background-color: ghostwhite;
+    }
   </style>
 </head>
 
 <body>
-  <section class="section">
+  <section class="section" style="width: 300px;">
     <h2>水平方向</h2>
     <div class="tab__scroller-wrapper">
       <div class="tab__scroller">
@@ -119,27 +132,37 @@
         </div>
       </div>
     </div>
-    <div class="tip">注：设置 activeItem，为‘life’ item</div>
-  </section>
-
-  <section class="section">
-    <h2>垂直方向</h2>
-    <div class="tab__scroller-wrapper">
-      <div class="tab__scroller vertical">
-        <div class="tab vertical">
-          <div class="tab-item">work</div>
-          <div class="tab-item">life</div>
-          <div class="tab-item">game</div>
-          <div class="tab-item">other</div>
-          <div class="tab-item">dddd</div>
-          <div class="tab-item">aaa</div>
-          <div class="tab-item">bbdsss</div>
-          <div class="tab-item">qq</div>
-          <div class="tab__slider"></div>
-        </div>
+    <div class="tab-content">
+      <div class="tab_pane work">
+        <div class="tab_pane-title">work</div>
+        <div class="tab_pane-body"></div>
+      </div>
+      <div class="tab_pane life">
+        <div class="tab_pane-title">life</div>
+        <div class="tab_pane-body"></div>
+      </div>
+      <div class="tab_pane game">
+        <div class="tab_pane-title">game</div>
+        <div class="tab_pane-body"></div>
+      </div>
+      <div class="tab_pane other">
+        <div class="tab_pane-title">other</div>
+        <div class="tab_pane-body"></div>
+      </div>
+      <div class="tab_pane cc">
+        <div class="tab_pane-title">cc</div>
+        <div class="tab_pane-body"></div>
+      </div>
+      <div class="tab_pane qq">
+        <div class="tab_pane-title">qq</div>
+        <div class="tab_pane-body"></div>
+      </div>
+      <div class="tab_pane aaa">
+        <div class="tab_pane-title">aaa</div>
+        <div class="tab_pane-body"></div>
       </div>
     </div>
-    <div class="tip">注：没有设置 activeItem</div>
+    <div class="tip">注：设置 activeItem，为‘life’ item</div>
   </section>
 </body>
 
@@ -149,13 +172,12 @@
     height: 2,
     backgroundColor: 'blue',
     scrollBar: true, // 默认为false
-  });
-
-  var tabHVertical = new Tab(document.querySelector('.tab.vertical'), {
-    direction: false, // vertical
-    width: 4,
-    backgroundColor: 'red',
-    scrollBar: true,
+    tabContentFn: function(self) {
+      window.addEventListener('hashchange', () => {
+        const tabpane = document.querySelector('.' + self.hashValue);
+        if (tabpane) self.scroll(tabpane);
+      });
+    }
   });
 </script>
 

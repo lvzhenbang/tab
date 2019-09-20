@@ -4583,6 +4583,31 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lzb-scrollintoview@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/lzb-scrollintoview/-/lzb-scrollintoview-0.0.4.tgz#0cc30929abf5cb367d4a811a578ad46437afca5f"
+  integrity sha512-BSEXLRhCT/qMR9SAT7DjxhJ5TQh4ZJh1Ww0rdA3Lw4L4gHzBQjZXiE3BtIYiAtQfQacxp7+n6gjxNCxyDdimBQ==
+  dependencies:
+    "@babel/cli" "^7.5.0"
+    "@babel/core" "^7.5.4"
+    "@babel/plugin-transform-modules-umd" "^7.2.0"
+    "@babel/preset-env" "^7.5.4"
+    babel-eslint "^10.0.2"
+    babel-loader "^8.0.6"
+    core-js "^3.1.4"
+    eslint "^6.0.1"
+    eslint-config-airbnb "^17.1.1"
+    eslint-plugin-import "^2.18.0"
+    eslint-plugin-jest "^22.9.0"
+    eslint-plugin-jsx-a11y "^6.2.3"
+    eslint-plugin-react "^7.14.2"
+    html-webpack-plugin "^3.2.0"
+    jest "^24.8.0"
+    lzb-scrollto "^0.2.1"
+    webpack "^4.35.3"
+    webpack-cli "^3.3.5"
+    webpack-dev-server "^3.7.2"
+
 lzb-scrollto@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/lzb-scrollto/-/lzb-scrollto-0.2.1.tgz#2cd1b6d13124b38034ec05b499d5b577f0adb5a2"
