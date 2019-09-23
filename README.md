@@ -4,8 +4,9 @@ A plugin of tab.
 
 ## demo
 
-* [` horizontal tab `]()
-* [` vertical tab `]()
+* [` horizontal tab `](https://lvzhenbang.github.io/tab/dist/index.html)
+* [` vertical tab `](https://lvzhenbang.github.io/tab/dist/vertical.html)
+* [` scrollspay `](https://lvzhenbang.github.io/scrollspy/scrollspy.html)
 
 # reference
 
