@@ -149,7 +149,7 @@ class Tab {
 
   hideScrollbar() {
     if (
-      this.options.scrollBar
+      !this.options.scrollBar
       && (
         this.scrollBarEl.offsetHeight > this.scrollBarEl.clientHeight
         || this.scrollBarEl.offsetWidth > this.scrollBarEl.clientWidth
@@ -162,7 +162,7 @@ class Tab {
       }
     }
 
-    if (!this.options.scrollBar) {
+    if (this.options.scrollBar) {
       if (this.isHorizontal) {
         this.$el.style['margin-bottom'] = addUnit(10);
         this.scrollBarEl.style['margin-bottom'] = addUnit(-10);
